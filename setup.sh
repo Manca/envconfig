@@ -40,9 +40,9 @@ if [ -d .emacs.d/ ]; then
     mv .emacs.d .emacs.d~
 fi
 git clone https://github.com/Manca/envconfig.git
-ln -sb dotfiles/.screenrc .
-ln -sb dotfiles/.bash_profile .
-ln -sb dotfiles/.bashrc .
-ln -sb dotfiles/.bashrc_custom .
-ln -sf dotfiles/.emacs.d .
+ln -sb envconfig/.screenrc .
+ln -sb envconfig/.bash_profile .
+ln -sb envconfig/.bashrc .
+ln -sb envconfig/.bashrc_custom .
+ln -sf envconfig/.emacs.d .
 
