@@ -11,7 +11,7 @@ ln -sb envconfig/.bash_profile .
 ln -sb envconfig/.bashrc .
 ln -sb envconfig/.bashrc_custom .
 mv .emacs.d .emacs.d~
-ln -s dotfiles/.emacs.d .
+ln -s envconfig/.emacs.d .
 ```
 
 See also http://github.com/startup-class/setup to install prerequisite
