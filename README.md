@@ -6,10 +6,10 @@ configure your `bash` and `emacs` development environment as follows:
 ```sh
 cd $HOME
 git clone https://github.com/Manca/envconfig.git
-ln -sb dotfiles/.screenrc .
-ln -sb dotfiles/.bash_profile .
-ln -sb dotfiles/.bashrc .
-ln -sb dotfiles/.bashrc_custom .
+ln -sb envconfig/.screenrc .
+ln -sb envconfig/.bash_profile .
+ln -sb envconfig/.bashrc .
+ln -sb envconfig/.bashrc_custom .
 mv .emacs.d .emacs.d~
 ln -s dotfiles/.emacs.d .
 ```
