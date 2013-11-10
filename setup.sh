@@ -45,4 +45,4 @@ ln -sb envconfig/.bash_profile .
 ln -sb envconfig/.bashrc .
 ln -sb envconfig/.bashrc_custom .
 ln -sf envconfig/.emacs.d .
-
+ln -sb envconfig/.gitconfig .

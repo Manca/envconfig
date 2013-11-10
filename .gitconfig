@@ -1,0 +1,9 @@
+[user]
+	name = Manca
+	email = manca1@gmail.com
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
