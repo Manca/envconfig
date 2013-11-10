@@ -169,6 +169,15 @@ PS1='\[\e[1;34m\][\[\e[m\]\[\e[0;31m\]\u\[\e[m\]\[\e[1;33m\]@\[\e[m\]\[\e[1;34m\
 ## -- 2) Set up aliases --
 ## -----------------------
 
+# 2.0) Check the platform
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]]; then
+    platform='osx'
+elif [[ "$unamestr" == 'Linux' ]]; then
+    platform='linux'
+fi
+
 # 2.1) Safety
 alias rm="rm -i"
 alias mv="mv -i"
@@ -176,19 +185,28 @@ alias cp="cp -i"
 set -o noclobber
 
 # 2.2) Listing, directories, and motion
-alias ls="ls --color"
-alias ll="ls -alrtF --color"
-alias la="ls -A"
-alias l="ls -CF"
-alias dir='ls --color=auto --format=vertical'
-alias vdir='ls --color=auto --format=long'
+if [[ "$platform" == 'linux' ]]; then
+    alias ls="ls --color"
+    alias ll="ls -alrtF --color"
+    alias la="ls -A"
+    alias l="ls -CF"
+    alias dir='ls --color=auto --format=vertical'
+    alias vdir='ls --color=auto --format=long'
+    alias du='du -ch --max-depth=1'
+    alias treeacl='tree -A -C -L 2'
+else
+    alias ls="ls -G"
+    alias ll="ls -alrtFG"
+    alias la="ls -A"
+    alias l="ls -CF"
+fi
+
+# Same commands for both Linux and OSX
 alias m='less'
 alias ..='cd ..'
 alias ...='cd ..;cd ..'
 alias md='mkdir'
 alias cl='clear'
-alias du='du -ch --max-depth=1'
-alias treeacl='tree -A -C -L 2'
 
 # 2.3) Text and editor commands
 alias em='emacs -nw'     # No X11 windows
