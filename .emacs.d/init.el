@@ -122,7 +122,7 @@
 ;; -- Python Mode configuration --
 ;; install newest from: https://launchpad.net/python-mode
 ;; --------------------------- 
-(setq py-install-directory "/home/manca/.emacs.d/elpa/python-mode.el-6.1.2")
+(setq py-install-directory "~/.emacs.d/elpa/python-mode.el-6.1.2")
 (add-to-list 'load-path py-install-directory)
 ;(setq py-shell-name "ipython")
 
