@@ -67,24 +67,91 @@
 (global-set-key "\M-u" 'zap-to-char)
 
 ;; ---------------------------
-;; -- JS Mode configuration --
+;; -- Basic configuration --
+;; --                     --
+;; -- some of it based on: https://github.com/AndreaCrotti/minimal-emacs-configuration/blob/master/init.el
 ;; ---------------------------
-(load "js-config.el")
-(add-to-list 'load-path "~/.emacs.d/jade-mode") ;; github.com/brianc/jade-mode
-(require 'sws-mode)
-(require 'jade-mode)    
-(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
-(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
-;; MELPA repo added
 (require 'package)
+
+;; MELPA and marmelade repos added
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; init installed packages
 (package-initialize)
 
+;; automatically install required packages if not installed already
+(defun install-if-needed (package)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(setq to-install
+      '(js3-mode yasnippet jedi auto-complete autopair find-file-in-repository))
+
+(mapc 'install-if-needed to-install)
+
+;; require some necessary packages
 (require 'auto-complete-config)
+(require 'autopair)
 (require 'yasnippet)
+
+(global-set-key [f7] 'find-file-in-repository)
 (ac-config-default)
 (yas-global-mode 1)
+(electric-pair-mode 1)
+
+;; ---------------------------
+;; -- JS Mode configuration --
+;; ---------------------------
+(require 'js3-mode)
+(add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
+(add-hook 'js3-mode-hook
+          (lambda ()
+            (load "js-config.el")
+	    (add-to-list 'load-path "~/.emacs.d/jade-mode") ;; github.com/brianc/jade-mode	    
+	    (require 'sws-mode)
+	    (require 'jade-mode)    
+	    (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+	    (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+))
+
+;; --------------------------- 
+;; -- Python Mode configuration --
+;; install newest from: https://launchpad.net/python-mode
+;; --------------------------- 
+(setq py-install-directory "/home/manca/.emacs.d/elpa/python-mode.el-6.1.2")
+(add-to-list 'load-path py-install-directory)
+;(setq py-shell-name "ipython")
+
+(require 'python-mode)
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+(setq py-electric-colon-active t)
+(add-hook 'python-mode-hook 'autopair-mode)
+(add-hook 'python-mode-hook 'yas-minor-mode)
+
+;; Jedi settings
+(require 'jedi)
+;; It's also required to run "pip install --user jedi" and "pip
+;; install --user epc" to get the Python side of the library work
+;; correctly.
+;; With the same interpreter you're using.
+
+;; if you need to change your python intepreter, if you want to change it
+;; (setq jedi:server-command
+;;       '("python2" "/home/andrea/.emacs.d/elpa/jedi-0.1.2/jediepcserver.py"))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (jedi:setup)
+            (jedi:ac-setup)
+            (local-set-key "\C-cd" 'jedi:show-doc)
+            (local-set-key "\C-cl" 'jedi:complete)
+            (local-set-key (kbd "M-.") 'jedi:goto-definition)
+    	    (electric-pair-mode f)))
+
+(add-hook 'python-mode-hook 'auto-complete-mode)
+
+;(require 'ipython)
