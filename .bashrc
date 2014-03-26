@@ -162,8 +162,17 @@ shopt -s histappend
 
 # Make prompt informative
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
+
+#adds the current branch name in green
+git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ -n $ref ]]; then
+    echo "[${ref#refs/heads/}]"
+  fi
+}
+
 #PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
-PS1='\[\e[1;34m\][\[\e[m\]\[\e[0;31m\]\u\[\e[m\]\[\e[1;33m\]@\[\e[m\]\[\e[1;34m\]\h:\w\[\e[m\]\[\e[1;34m\]]\[\e[m\]\[\e[0;31m\]\$\[\e[m\] ' #\[\e[0;32m\]'
+PS1='\[\e[1;32m\]$(git_prompt_info)\[\e[m\]\[\e[1;34m\][\[\e[m\]\[\e[0;31m\]\u\[\e[m\]\[\e[1;33m\]@\[\e[m\]\[\e[1;34m\]\h:\w\[\e[m\]\[\e[1;34m\]]\[\e[m\]\[\e[0;31m\]\$\[\e[m\] ' #\[\e[0;32m\]'
 
 ## -----------------------
 ## -- 2) Set up aliases --
