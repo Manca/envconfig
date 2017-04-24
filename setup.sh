@@ -1,7 +1,9 @@
 #!/bin/bash
-# Simple setup.sh for configuring Ubuntu 12.04 LTS EC2 instance
+# Simple setup.sh for configuring Ubuntu 16.04 LTS
 # for headless setup. 
-
+#
+# Updated 4/22/2017
+#
 # Install nvm: node-version manager
 # https://github.com/creationix/nvm
 
@@ -29,15 +31,16 @@ if [ "$1" == 'install' ]; then
     # See: http://nodejs.org/api/repl.html#repl_repl
     #sudo apt-get install -y rlwrap
 
-    # Install emacs24
-    # https://launchpad.net/~cassou/+archive/emacs
-    sudo add-apt-repository -y ppa:cassou/emacs
-    sudo apt-get -qq update
-    sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
-
     # Install Heroku toolbelt
     # https://toolbelt.heroku.com/debian
-    wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+    # wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+    ##################################
+      
+    # Install emacs25
+    # sudo add-apt-repository ppa:kelleyk/emacs
+    sudo add-apt-repository ppa:kelleyk/emacs
+    sudo apt-get -qq update
+    sudo apt-get install -y emacs25-nox emacs25-el
 fi
 
 # git pull and install dotfiles as well
