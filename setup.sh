@@ -52,7 +52,7 @@ fi
 if [ -d .emacs.d/ ]; then
     mv .emacs.d .emacs.d~
 fi
-git clone https://github.com/Manca/envconfig.git
+#git clone https://github.com/Manca/envconfig.git
 ln -sf envconfig/.screenrc .
 ln -sf envconfig/.bash_profile .
 ln -sf envconfig/.bashrc .
