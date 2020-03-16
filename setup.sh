@@ -46,12 +46,10 @@ fi
 # git pull and install dotfiles as well
 echo "Setting up environment..."
 cd $HOME
-if [ -d ./envconfig/ ]; then
-    mv envconfig  envconfig.old
-fi
 if [ -d .emacs.d/ ]; then
     mv .emacs.d .emacs.d~
 fi
+
 #git clone https://github.com/Manca/envconfig.git
 ln -sf envconfig/.screenrc .
 ln -sf envconfig/.bash_profile .
